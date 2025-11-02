@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venue Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('resource/back.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        main {
+            padding: 2rem;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        form input, form select, form textarea, form button {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        form button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Book a Venue for Your Event</h1>
+        <nav>
+        <a href="index.html">Home</a>
+        <a href="event.html">Events</a>
+        <a href="service.html">Services</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+    </header>
+    <main>
+        <form action="action.php" method="POST">
+            <label for="state">Select State:</label>
+            <select id="state"  name="state" required>
+                <option value="">Select a state</option>
+                <option value="state1" name="state">State 1</option>
+                <option value="state2" name="state">State 2</option>
+                <option value="state3" name="state">State 3</option>
+            </select>
+
+            <label for="district">Select District:</label>
+            <select id="district" name="district" required>
+                <option value="">Select a district</option>
+            </select>
+
+            <label for="city">Select City:</label>
+            <select id="city" name="city" required>
+                <option value="">Select a city</option>
+            </select>
+
+            <label for="venue">Select Venue:</label>
+            <select id="venue" name="venue" required>
+                <option value="">Select a venue</option>
+            </select>
+
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="event-type">Event Type:</label>
+            <select id="event-type" name="event_type" required>
+                <option value="">Select an event type</option>
+                <option value="wedding">Wedding</option>
+                <option value="conference">Conference</option>
+                <option value="birthday">Birthday Party</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="date">Event Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="guests">Number of Guests:</label>
+            <input type="tel" id="guests" name="guests" required>
+
+            <label for="message">Additional Details:</label>
+            <textarea id="message" name="message" rows="4"></textarea>
+
+            <button type="submit">Submit Booking</button>
+        </form>
+    </main>
+
+    <script>
+        const stateDistrictCityVenueData = {
+            state1: {
+                districts: {
+                    district1: {
+                        cities: {
+                            "City 1-1": ["Venue 1-1-1", "Venue 1-1-2"],
+                            "City 1-2": ["Venue 1-2-1", "Venue 1-2-2"],
+                        },
+                    },
+                    district2: {
+                        cities: {
+                            "City 2-1": ["Venue 2-1-1", "Venue 2-1-2"],
+                            "City 2-2": ["Venue 2-2-1", "Venue 2-2-2"],
+                        },
+                    },
+                },
+            },
+            state2: {
+                districts: {
+                    district3: {
+                        cities: {
+                            "City 3-1": ["Venue 3-1-1", "Venue 3-1-2"],
+                            "City 3-2": ["Venue 3-2-1", "Venue 3-2-2"],
+                        },
+                    },
+                    district4: {
+                        cities: {
+                            "City 4-1": ["Venue 4-1-1", "Venue 4-1-2"],
+                            "City 4-2": ["Venue 4-2-1", "Venue 4-2-2"],
+                        },
+                    },
+                },
+            },
+            state3: {
+                districts: {
+                    district5: {
+                        cities: {
+                            "City 5-1": ["Venue 5-1-1", "Venue 5-1-2"],
+                            "City 5-2": ["Venue 5-2-1", "Venue 5-2-2"],
+                        },
+                    },
+                    district6: {
+                        cities: {
+                            "City 6-1": ["Venue 6-1-1", "Venue 6-1-2"],
+                            "City 6-2": ["Venue 6-2-1", "Venue 6-2-2"],
+                        },
+                    },
+                },
+            },
+        };
+
+        const stateSelect = document.getElementById("state");
+        const districtSelect = document.getElementById("district");
+        const citySelect = document.getElementById("city");
+        const venueSelect = document.getElementById("venue");
+
+        stateSelect.addEventListener("change", () => {
+            const selectedState = stateSelect.value;
+            districtSelect.innerHTML = '<option value="">Select a district</option>';
+            citySelect.innerHTML = '<option value="">Select a city</option>';
+            venueSelect.innerHTML = '<option value="">Select a venue</option>';
+
+            if (selectedState && stateDistrictCityVenueData[selectedState]) {
+                const districts = stateDistrictCityVenueData[selectedState].districts;
+                for (const district in districts) {
+                    const option = document.createElement("option");
+                    option.value = district;
+                    option.textContent = district;
+                    districtSelect.appendChild(option);
+                }
+            }
+        });
+
+        districtSelect.addEventListener("change", () => {
+            const selectedState = stateSelect.value;
+            const selectedDistrict = districtSelect.value;
+            citySelect.innerHTML = '<option value="">Select a city</option>';
+            venueSelect.innerHTML = '<option value="">Select a venue</option>';
+
+            if (
+                selectedState &&
+                selectedDistrict &&
+                stateDistrictCityVenueData[selectedState] &&
+                stateDistrictCityVenueData[selectedState].districts[selectedDistrict]
+            ) {
+                const cities =
+                    stateDistrictCityVenueData[selectedState].districts[selectedDistrict]
+                        .cities;
+                for (const city in cities) {
+                    const option = document.createElement("option");
+                    option.value = city;
+                    option.textContent = city;
+                    citySelect.appendChild(option);
+                }
+            }
+        });
+
+        citySelect.addEventListener("change", () => {
+            const selectedState = stateSelect.value;
+            const selectedDistrict = districtSelect.value;
+            const selectedCity = citySelect.value;
+            venueSelect.innerHTML = '<option value="">Select a venue</option>';
+
+            if (
+                selectedState &&
+                selectedDistrict &&
+                selectedCity &&
+                stateDistrictCityVenueData[selectedState] &&
+                stateDistrictCityVenueData[selectedState].districts[selectedDistrict] &&
+                stateDistrictCityVenueData[selectedState].districts[selectedDistrict]
+                    .cities[selectedCity]
+            ) {
+                const venues =
+                    stateDistrictCityVenueData[selectedState].districts[selectedDistrict]
+                        .cities[selectedCity];
+                venues.forEach((venue) => {
+                    const option = document.createElement("option");
+                    option.value = venue;
+                    option.textContent = venue;
+                    venueSelect.appendChild(option);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
