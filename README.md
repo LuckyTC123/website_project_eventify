@@ -34,9 +34,7 @@ EventEase is a full-stack web application designed to simplify event planning an
 
 ---
 
-## 📸 Screenshots
 
-> _Add screenshots here to showcase your homepage, event creation form, and email invitation UI._
 
 ---
 
